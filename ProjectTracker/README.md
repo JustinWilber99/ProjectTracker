@@ -1,5 +1,4 @@
-#roject Tracker
-
+Project Tracker - Ahmed Mohamud, Justin Wilber, Eric Kristiansen, Edwin Escamilla
 
 Project Tracker is a software application tool used for issue tracking and project 
 management. Devs can create and modify notes to describe their progress on their 
