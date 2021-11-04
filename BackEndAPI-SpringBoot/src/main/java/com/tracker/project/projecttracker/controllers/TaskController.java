@@ -1,7 +1,6 @@
 package com.tracker.project.projecttracker.controllers;
 
 import com.tracker.project.projecttracker.exceptions.ResourceNotFoundException;
-import com.tracker.project.projecttracker.models.Project;
 import com.tracker.project.projecttracker.models.Task;
 import com.tracker.project.projecttracker.models.User;
 import com.tracker.project.projecttracker.services.ProjectService;

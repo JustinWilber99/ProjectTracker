@@ -1,7 +1,6 @@
 package com.tracker.project.projecttracker.services;
 
 import com.tracker.project.projecttracker.models.Project;
-import com.tracker.project.projecttracker.models.User;
 
 import java.util.List;
 import java.util.Optional;

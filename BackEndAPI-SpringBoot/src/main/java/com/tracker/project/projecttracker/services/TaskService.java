@@ -1,6 +1,5 @@
 package com.tracker.project.projecttracker.services;
 
-import com.tracker.project.projecttracker.models.Project;
 import com.tracker.project.projecttracker.models.Task;
 
 import java.util.List;

@@ -1,17 +1,12 @@
 package com.tracker.project.projecttracker.controllers;
 
 import com.tracker.project.projecttracker.exceptions.ResourceNotFoundException;
-import com.tracker.project.projecttracker.models.Project;
-import com.tracker.project.projecttracker.models.Task;
 import com.tracker.project.projecttracker.models.User;
-import com.tracker.project.projecttracker.models.UserRole;
 import com.tracker.project.projecttracker.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

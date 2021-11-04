@@ -1,9 +1,7 @@
 package com.tracker.project.projecttracker.services.impl;
 
 import com.tracker.project.projecttracker.models.Project;
-import com.tracker.project.projecttracker.models.User;
 import com.tracker.project.projecttracker.repository.ProjectRepository;
-import com.tracker.project.projecttracker.repository.UserRepository;
 import com.tracker.project.projecttracker.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
