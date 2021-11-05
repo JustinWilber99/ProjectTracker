@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Data
 public class Task {
     @Id()
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long task_id;
 
     private String task_description;

@@ -18,7 +18,7 @@ import java.util.List;
 @Data
 public class Project {
     @Id()
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long project_id;
     private String project_name;
     @ManyToMany(mappedBy = "user_projects", fetch = FetchType.LAZY)
