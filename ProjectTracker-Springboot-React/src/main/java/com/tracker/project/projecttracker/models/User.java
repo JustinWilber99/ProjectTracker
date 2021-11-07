@@ -25,6 +25,8 @@ public class User {
     private String firstname;
     private String lastname;
     private UserRole userRole;
+    private String profpic;
+    
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Project> user_projects = new ArrayList<>();
     @OneToMany(mappedBy = "task_to", fetch = FetchType.LAZY)
@@ -142,6 +144,18 @@ public class User {
 
 	public void setUser_tasks(List<Task> user_tasks) {
 		this.user_tasks = user_tasks;
+	}
+
+
+
+	public String getProfpic() {
+		return profpic;
+	}
+
+
+
+	public void setProfpic(String profpic) {
+		this.profpic = profpic;
 	}
 
 }
