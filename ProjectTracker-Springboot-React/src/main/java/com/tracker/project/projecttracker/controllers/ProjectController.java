@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class ProjectController {
     @Autowired
     private  ProjectService projectService;
@@ -25,11 +26,14 @@ public class ProjectController {
 
 
     @PostMapping("/project/save")
+    @CrossOrigin
     public Project saveProject(@RequestBody Project project){
         System.out.println(project);
         return this.projectService.save(project);
     }
+    
     @PostMapping("/project/adduser/{projectid}/{userid}")
+    @CrossOrigin
     public Project addUserToProject(@PathVariable(value = "projectid") Long projectid,@PathVariable(value = "userid") Long userid){
         User user = this.userService.findById(userid).orElseThrow(
                 () -> new ResourceNotFoundException("User could not be found!")
@@ -44,6 +48,7 @@ public class ProjectController {
     }
 
     @PostMapping("/project/addtask/{projectid}/{taskid}")
+    @CrossOrigin
     public Project addTaskToProject(@PathVariable(value = "projectid") Long projectid,@PathVariable(value = "taskid") Long taskid){
         Task task = this.taskService.findById(taskid).orElseThrow(
                 () -> new ResourceNotFoundException("Task could not be found!")
@@ -58,6 +63,7 @@ public class ProjectController {
     }
 
     @GetMapping("/project/all")
+    @CrossOrigin
     public ResponseEntity<List<Project>> getProjects(){
         return ResponseEntity.ok(
                 this.projectService.findAll()
@@ -65,6 +71,7 @@ public class ProjectController {
     }
 
     @GetMapping("/project/{id}")
+    @CrossOrigin
     public ResponseEntity<Project> getProject(@PathVariable(value = "id") Long id){
         Project project = this.projectService.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Project not found!")
@@ -73,6 +80,7 @@ public class ProjectController {
     }
 
     @PutMapping("/project/{id}")
+    @CrossOrigin
     public Project updateProject(@RequestBody Project newProject, @PathVariable(value = "id") Long id){
         return this.projectService.findById(id)
                 .map(project -> {
@@ -89,7 +97,9 @@ public class ProjectController {
                     return this.projectService.save(newProject);
                 });
     }
+    
     @PostMapping("/project/adduser/{id}")
+    @CrossOrigin
     public Project addProject(@RequestBody User user, @PathVariable(value = "id") Long id){
         Project project = this.projectService.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Project not found!")
@@ -99,6 +109,7 @@ public class ProjectController {
     }
 
     @DeleteMapping("project/{id}")
+    @CrossOrigin
     public ResponseEntity<Void> removeProject(@PathVariable(value = "id") Long id){
         Project project = this.projectService.findById(id)
                 .orElseThrow(

@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class TaskController {
     @Autowired
     private TaskService taskService;
@@ -25,6 +26,7 @@ public class TaskController {
 
 
     @PostMapping("/task/save/{id}")
+    @CrossOrigin
     public Task saveTask(@RequestBody Task task,@PathVariable(value = "id") Long id){
         User user = this.userService.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("User not found!")
@@ -34,6 +36,7 @@ public class TaskController {
     }
 
     @GetMapping("/task/all")
+    @CrossOrigin
     public ResponseEntity<List<Task>> getTasks(){
         return ResponseEntity.ok(
                 this.taskService.findAll()
@@ -41,6 +44,7 @@ public class TaskController {
     }
 
     @GetMapping("/task/{id}")
+    @CrossOrigin
     public ResponseEntity<Task> getTask(@PathVariable(value = "id") Long id){
         Task task = this.taskService.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Task not found!")
@@ -50,6 +54,7 @@ public class TaskController {
 
 
     @PutMapping("/task/{id}")
+    @CrossOrigin
     public Task updateTask(@RequestBody Task newTask, @PathVariable(value = "id") Long id){
         return this.taskService.findById(id)
                 .map(task -> {
@@ -68,6 +73,7 @@ public class TaskController {
     }
 
     @DeleteMapping("task/{id}")
+    @CrossOrigin
     public ResponseEntity<Void> removeTask(@PathVariable(value = "id") Long id){
         Task task = this.taskService.findById(id)
                 .orElseThrow(
