@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
-@CrossOrigin
+@RequestMapping("/api/task")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TaskController {
     @Autowired
     private TaskService taskService;
@@ -25,8 +25,7 @@ public class TaskController {
     UserService userService;
 
 
-    @PostMapping("/task/save/{id}")
-    @CrossOrigin
+    @PostMapping("/save/{id}")
     public Task saveTask(@RequestBody Task task,@PathVariable(value = "id") Long id){
         User user = this.userService.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("User not found!")
@@ -35,16 +34,14 @@ public class TaskController {
         return this.taskService.save(task);
     }
 
-    @GetMapping("/task/all")
-    @CrossOrigin
+    @GetMapping("/all")
     public ResponseEntity<List<Task>> getTasks(){
         return ResponseEntity.ok(
                 this.taskService.findAll()
         );
     }
 
-    @GetMapping("/task/{id}")
-    @CrossOrigin
+    @GetMapping("/{id}")
     public ResponseEntity<Task> getTask(@PathVariable(value = "id") Long id){
         Task task = this.taskService.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Task not found!")
@@ -53,8 +50,7 @@ public class TaskController {
     }
 
 
-    @PutMapping("/task/{id}")
-    @CrossOrigin
+    @PutMapping("/{id}")
     public Task updateTask(@RequestBody Task newTask, @PathVariable(value = "id") Long id){
         return this.taskService.findById(id)
                 .map(task -> {
@@ -72,8 +68,7 @@ public class TaskController {
                 });
     }
 
-    @DeleteMapping("task/{id}")
-    @CrossOrigin
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeTask(@PathVariable(value = "id") Long id){
         Task task = this.taskService.findById(id)
                 .orElseThrow(

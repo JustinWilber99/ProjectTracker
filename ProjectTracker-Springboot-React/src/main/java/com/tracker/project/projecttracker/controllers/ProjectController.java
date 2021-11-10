@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
-@CrossOrigin
+@RequestMapping("/api/project")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProjectController {
     @Autowired
     private  ProjectService projectService;
@@ -25,15 +25,13 @@ public class ProjectController {
     UserService userService;
 
 
-    @PostMapping("/project/save")
-    @CrossOrigin
+    @PostMapping("/save")
     public Project saveProject(@RequestBody Project project){
         System.out.println(project);
         return this.projectService.save(project);
     }
     
-    @PostMapping("/project/adduser/{projectid}/{userid}")
-    @CrossOrigin
+    @PostMapping("/adduser/{projectid}/{userid}")
     public Project addUserToProject(@PathVariable(value = "projectid") Long projectid,@PathVariable(value = "userid") Long userid){
         User user = this.userService.findById(userid).orElseThrow(
                 () -> new ResourceNotFoundException("User could not be found!")
@@ -47,8 +45,7 @@ public class ProjectController {
         return this.projectService.save(project);
     }
 
-    @PostMapping("/project/addtask/{projectid}/{taskid}")
-    @CrossOrigin
+    @PostMapping("/addtask/{projectid}/{taskid}")
     public Project addTaskToProject(@PathVariable(value = "projectid") Long projectid,@PathVariable(value = "taskid") Long taskid){
         Task task = this.taskService.findById(taskid).orElseThrow(
                 () -> new ResourceNotFoundException("Task could not be found!")
@@ -62,16 +59,14 @@ public class ProjectController {
         return this.projectService.save(project);
     }
 
-    @GetMapping("/project/all")
-    @CrossOrigin
+    @GetMapping("/all")
     public ResponseEntity<List<Project>> getProjects(){
         return ResponseEntity.ok(
                 this.projectService.findAll()
         );
     }
 
-    @GetMapping("/project/{id}")
-    @CrossOrigin
+    @GetMapping("/{id}")
     public ResponseEntity<Project> getProject(@PathVariable(value = "id") Long id){
         Project project = this.projectService.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Project not found!")
@@ -79,8 +74,7 @@ public class ProjectController {
         return ResponseEntity.ok().body(project);
     }
 
-    @PutMapping("/project/{id}")
-    @CrossOrigin
+    @PutMapping("/{id}")
     public Project updateProject(@RequestBody Project newProject, @PathVariable(value = "id") Long id){
         return this.projectService.findById(id)
                 .map(project -> {
@@ -98,8 +92,7 @@ public class ProjectController {
                 });
     }
     
-    @PostMapping("/project/adduser/{id}")
-    @CrossOrigin
+    @PostMapping("/adduser/{id}")
     public Project addProject(@RequestBody User user, @PathVariable(value = "id") Long id){
         Project project = this.projectService.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Project not found!")
@@ -108,8 +101,7 @@ public class ProjectController {
         return this.projectService.save(project);
     }
 
-    @DeleteMapping("project/{id}")
-    @CrossOrigin
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeProject(@PathVariable(value = "id") Long id){
         Project project = this.projectService.findById(id)
                 .orElseThrow(

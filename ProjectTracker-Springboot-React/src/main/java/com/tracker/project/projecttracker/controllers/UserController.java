@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("api/users")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
     private final UserService userService;
 
@@ -26,7 +26,6 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    @CrossOrigin
     public ResponseEntity<User> login(@RequestBody User u){
         String username = u.getUsername();
         String password = u.getPassword();
@@ -44,13 +43,11 @@ public class UserController {
 
 
     @PostMapping("/save")
-    @CrossOrigin
     public User saveUser(@RequestBody User user){
         return this.userService.save(user);
     }
 
     @GetMapping("/all")
-    @CrossOrigin
     public ResponseEntity<List<User>> getUsers(){
         return ResponseEntity.ok(
                 this.userService.findAll()
@@ -58,14 +55,12 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    @CrossOrigin
     public ResponseEntity<User> getUser(@PathVariable(value = "id") Long id){
         return ResponseEntity.ok().body(this.userService.findById(id).orElseThrow(null));
     }
 
 
     @PutMapping("/{id}")
-    @CrossOrigin
     public User updateUser(@RequestBody User newUser, @PathVariable(value = "id") Long id){
         return this.userService.findById(id)
                 .map(user -> {
@@ -84,7 +79,6 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    @CrossOrigin
     public ResponseEntity<Void> removeUser(@PathVariable(value = "id") Long id){
         User user = this.userService.findById(id)
                 .orElseThrow(
