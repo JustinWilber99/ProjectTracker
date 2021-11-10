@@ -25,6 +25,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @CrossOrigin
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody User u){
         String username = u.getUsername();
@@ -41,12 +42,13 @@ public class UserController {
         }
     }
 
-
+    @CrossOrigin
     @PostMapping("/save")
     public User saveUser(@RequestBody User user){
         return this.userService.save(user);
     }
 
+    @CrossOrigin
     @GetMapping("/all")
     public ResponseEntity<List<User>> getUsers(){
         return ResponseEntity.ok(
@@ -54,12 +56,13 @@ public class UserController {
         );
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable(value = "id") Long id){
         return ResponseEntity.ok().body(this.userService.findById(id).orElseThrow(null));
     }
 
-
+    @CrossOrigin
     @PutMapping("/{id}")
     public User updateUser(@RequestBody User newUser, @PathVariable(value = "id") Long id){
         return this.userService.findById(id)
@@ -78,6 +81,7 @@ public class UserController {
                 });
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeUser(@PathVariable(value = "id") Long id){
         User user = this.userService.findById(id)
