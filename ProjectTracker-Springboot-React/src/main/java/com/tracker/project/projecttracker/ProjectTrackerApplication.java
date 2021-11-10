@@ -8,7 +8,18 @@ import org.springframework.context.annotation.ComponentScan;
 public class ProjectTrackerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProjectTrackerApplication.class, args);
+    	
+    	while(true)
+    	{
+    		try
+    		{
+    		 SpringApplication.run(ProjectTrackerApplication.class, args);
+    		}catch(Exception ex) 
+    		{
+    			ex.printStackTrace();
+    		}
+    	}
+        
     }
 
 
