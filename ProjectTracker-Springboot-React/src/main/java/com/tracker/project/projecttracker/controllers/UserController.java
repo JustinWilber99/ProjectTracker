@@ -2,19 +2,14 @@ package com.tracker.project.projecttracker.controllers;
 
 import com.tracker.project.projecttracker.exceptions.ResourceNotFoundException;
 import com.tracker.project.projecttracker.models.Mail;
-import com.tracker.project.projecttracker.models.Project;
-import com.tracker.project.projecttracker.models.Task;
 import com.tracker.project.projecttracker.models.User;
-import com.tracker.project.projecttracker.models.UserRole;
 import com.tracker.project.projecttracker.services.MailService;
 import com.tracker.project.projecttracker.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("api/users")
@@ -48,13 +43,13 @@ public class UserController {
     
     @CrossOrigin
     @PostMapping("/email")
-    public String sendEmail(@RequestBody Mail mail)
+    public ResponseEntity<String> sendEmail(@RequestBody Mail mail)
     {
     	String result = "Email sent successfully.";
     	try {
     		mailService.sendEmail(mail);
     	} catch(Exception ex) {result = ex.getMessage();}
-    	return result;
+    	return ResponseEntity.ok().body(result);
 	}
 
     @CrossOrigin
@@ -106,7 +101,6 @@ public class UserController {
         this.userService.delete(user);
         return ResponseEntity.ok().build();
     }
-    
-    
+
 
 }
