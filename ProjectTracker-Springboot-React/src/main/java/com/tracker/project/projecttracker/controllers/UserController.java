@@ -1,10 +1,12 @@
 package com.tracker.project.projecttracker.controllers;
 
 import com.tracker.project.projecttracker.exceptions.ResourceNotFoundException;
+import com.tracker.project.projecttracker.models.Mail;
 import com.tracker.project.projecttracker.models.Project;
 import com.tracker.project.projecttracker.models.Task;
 import com.tracker.project.projecttracker.models.User;
 import com.tracker.project.projecttracker.models.UserRole;
+import com.tracker.project.projecttracker.services.MailService;
 import com.tracker.project.projecttracker.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,12 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
     private final UserService userService;
+    private final MailService mailService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, MailService mailService) {
         this.userService = userService;
+        this.mailService = mailService;
     }
 
     @CrossOrigin
@@ -41,6 +45,17 @@ public class UserController {
             throw new ResourceNotFoundException("Pass is incorrect");
         }
     }
+    
+    @CrossOrigin
+    @PostMapping("/email")
+    public String sendEmail(@RequestBody Mail mail)
+    {
+    	String result = "Email sent successfully.";
+    	try {
+    		mailService.sendEmail(mail);
+    	} catch(Exception ex) {result = ex.getMessage();}
+    	return result;
+	}
 
     @CrossOrigin
     @PostMapping("/save")
@@ -91,5 +106,7 @@ public class UserController {
         this.userService.delete(user);
         return ResponseEntity.ok().build();
     }
+    
+    
 
 }
