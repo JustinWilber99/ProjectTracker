@@ -1,5 +1,10 @@
 package com.tracker.project.projecttracker.models;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Data
 public class Mail {
 	
 	String to;

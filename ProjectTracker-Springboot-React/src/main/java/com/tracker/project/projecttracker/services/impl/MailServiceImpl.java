@@ -1,5 +1,6 @@
 package com.tracker.project.projecttracker.services.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ public class MailServiceImpl implements MailService{
 	
 	JavaMailSender emailSender;
 	
+	@Autowired
 	MailServiceImpl(JavaMailSender emailSender){
 		this.emailSender = emailSender;
 	}

@@ -25,7 +25,6 @@ public class TaskController {
     UserService userService;
 
 
-    @CrossOrigin
     @PostMapping("/save/{id}")
     public Task saveTask(@RequestBody Task task,@PathVariable(value = "id") Long id){
         User user = this.userService.findById(id).orElseThrow(
@@ -35,7 +34,7 @@ public class TaskController {
         return this.taskService.save(task);
     }
 
-    @CrossOrigin
+
     @GetMapping("/all")
     public ResponseEntity<List<Task>> getTasks(){
         return ResponseEntity.ok(
@@ -43,7 +42,7 @@ public class TaskController {
         );
     }
 
-    @CrossOrigin
+
     @GetMapping("/{id}")
     public ResponseEntity<Task> getTask(@PathVariable(value = "id") Long id){
         Task task = this.taskService.findById(id).orElseThrow(
@@ -53,7 +52,7 @@ public class TaskController {
     }
 
 
-    @CrossOrigin
+
     @PutMapping("/{id}")
     public Task updateTask(@RequestBody Task newTask, @PathVariable(value = "id") Long id){
         return this.taskService.findById(id)
@@ -72,7 +71,7 @@ public class TaskController {
                 });
     }
 
-    @CrossOrigin
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeTask(@PathVariable(value = "id") Long id){
         Task task = this.taskService.findById(id)

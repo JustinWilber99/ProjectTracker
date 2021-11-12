@@ -15,16 +15,13 @@ import java.util.List;
 @RequestMapping("api/users")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
-    private final UserService userService;
-    private final MailService mailService;
+	
+	@Autowired
+    private UserService userService;
+	@Autowired
+    private MailService mailService;
 
-    @Autowired
-    public UserController(UserService userService, MailService mailService) {
-        this.userService = userService;
-        this.mailService = mailService;
-    }
 
-    @CrossOrigin
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody User u){
         String username = u.getUsername();
@@ -41,7 +38,7 @@ public class UserController {
         }
     }
     
-    @CrossOrigin
+
     @PostMapping("/email")
     public ResponseEntity<String> sendEmail(@RequestBody Mail mail)
     {
@@ -52,13 +49,13 @@ public class UserController {
     	return ResponseEntity.ok().body(result);
 	}
 
-    @CrossOrigin
+
     @PostMapping("/save")
-    public User saveUser(@RequestBody User user){
-        return this.userService.save(user);
+    public ResponseEntity<User> saveUser(@RequestBody User user){
+        return ResponseEntity.ok(this.userService.save(user));
     }
 
-    @CrossOrigin
+
     @GetMapping("/all")
     public ResponseEntity<List<User>> getUsers(){
         return ResponseEntity.ok(
@@ -66,13 +63,13 @@ public class UserController {
         );
     }
 
-    @CrossOrigin
+
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable(value = "id") Long id){
         return ResponseEntity.ok().body(this.userService.findById(id).orElseThrow(null));
     }
 
-    @CrossOrigin
+
     @PutMapping("/{id}")
     public User updateUser(@RequestBody User newUser, @PathVariable(value = "id") Long id){
         return this.userService.findById(id)
@@ -80,6 +77,7 @@ public class UserController {
                     user.setUsername(newUser.getUsername());
                     user.setPassword(newUser.getPassword());
                     user.setEmail(newUser.getEmail());
+                    user.setProfpic(newUser.getProfpic());
                     user.setFirstname(newUser.getFirstname());
                     user.setLastname(newUser.getLastname());
                     user.setUserRole(newUser.getUserRole());
@@ -91,7 +89,7 @@ public class UserController {
                 });
     }
 
-    @CrossOrigin
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeUser(@PathVariable(value = "id") Long id){
         User user = this.userService.findById(id)

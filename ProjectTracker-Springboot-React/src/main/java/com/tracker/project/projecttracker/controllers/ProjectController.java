@@ -17,6 +17,7 @@ import java.util.List;
 @RequestMapping("/api/project")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProjectController {
+	
     @Autowired
     private  ProjectService projectService;
     @Autowired
@@ -25,14 +26,13 @@ public class ProjectController {
     UserService userService;
 
 
-    @CrossOrigin
     @PostMapping("/save")
     public Project saveProject(@RequestBody Project project){
         System.out.println(project);
         return this.projectService.save(project);
     }
     
-    @CrossOrigin
+
     @PostMapping("/adduser/{projectid}/{userid}")
     public Project addUserToProject(@PathVariable(value = "projectid") Long projectid,@PathVariable(value = "userid") Long userid){
         User user = this.userService.findById(userid).orElseThrow(
@@ -47,7 +47,7 @@ public class ProjectController {
         return this.projectService.save(project);
     }
 
-    @CrossOrigin
+
     @PostMapping("/addtask/{projectid}/{taskid}")
     public Project addTaskToProject(@PathVariable(value = "projectid") Long projectid,@PathVariable(value = "taskid") Long taskid){
         Task task = this.taskService.findById(taskid).orElseThrow(
@@ -62,7 +62,7 @@ public class ProjectController {
         return this.projectService.save(project);
     }
 
-    @CrossOrigin
+
     @GetMapping("/all")
     public ResponseEntity<List<Project>> getProjects(){
         return ResponseEntity.ok(
@@ -70,7 +70,7 @@ public class ProjectController {
         );
     }
 
-    @CrossOrigin
+
     @GetMapping("/{id}")
     public ResponseEntity<Project> getProject(@PathVariable(value = "id") Long id){
         Project project = this.projectService.findById(id).orElseThrow(
@@ -79,7 +79,7 @@ public class ProjectController {
         return ResponseEntity.ok().body(project);
     }
 
-    @CrossOrigin
+
     @PutMapping("/{id}")
     public Project updateProject(@RequestBody Project newProject, @PathVariable(value = "id") Long id){
         return this.projectService.findById(id)
@@ -98,7 +98,7 @@ public class ProjectController {
                 });
     }
     
-    @CrossOrigin
+
     @PostMapping("/adduser/{id}")
     public Project addProject(@RequestBody User user, @PathVariable(value = "id") Long id){
         Project project = this.projectService.findById(id).orElseThrow(
@@ -108,7 +108,7 @@ public class ProjectController {
         return this.projectService.save(project);
     }
 
-    @CrossOrigin
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeProject(@PathVariable(value = "id") Long id){
         Project project = this.projectService.findById(id)
