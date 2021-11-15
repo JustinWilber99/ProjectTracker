@@ -6,6 +6,7 @@ C:\Users\erick\Documents\GitHub\Eric\ProjectTracker\ProjectTracker-Springboot-Re
 C:\Users\erick\Documents\GitHub\Eric\ProjectTracker\ProjectTracker-Springboot-React\src\main\java\com\tracker\project\projecttracker\controllers\UserController.java
 C:\Users\erick\Documents\GitHub\Eric\ProjectTracker\ProjectTracker-Springboot-React\src\main\java\com\tracker\project\projecttracker\models\User.java
 C:\Users\erick\Documents\GitHub\Eric\ProjectTracker\ProjectTracker-Springboot-React\src\main\java\com\tracker\project\projecttracker\services\impl\MailServiceImpl.java
+C:\Users\erick\Documents\GitHub\Eric\ProjectTracker\ProjectTracker-Springboot-React\src\main\java\com\tracker\project\projecttracker\logging\Logging.java
 C:\Users\erick\Documents\GitHub\Eric\ProjectTracker\ProjectTracker-Springboot-React\src\main\java\com\tracker\project\projecttracker\models\UserRole.java
 C:\Users\erick\Documents\GitHub\Eric\ProjectTracker\ProjectTracker-Springboot-React\src\main\java\com\tracker\project\projecttracker\exceptions\ResourceNotFoundException.java
 C:\Users\erick\Documents\GitHub\Eric\ProjectTracker\ProjectTracker-Springboot-React\src\main\java\com\tracker\project\projecttracker\repository\ProjectRepository.java

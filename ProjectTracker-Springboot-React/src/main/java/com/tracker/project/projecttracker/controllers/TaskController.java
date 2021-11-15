@@ -17,8 +17,9 @@ import java.util.List;
 @RequestMapping("/api/task")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TaskController {
+	
     @Autowired
-    private TaskService taskService;
+    TaskService taskService;
     @Autowired
     ProjectService projectService;
     @Autowired
@@ -34,14 +35,12 @@ public class TaskController {
         return this.taskService.save(task);
     }
 
-
     @GetMapping("/all")
     public ResponseEntity<List<Task>> getTasks(){
         return ResponseEntity.ok(
                 this.taskService.findAll()
         );
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<Task> getTask(@PathVariable(value = "id") Long id){
@@ -52,8 +51,7 @@ public class TaskController {
     }
 
 
-
-    @PutMapping("/{id}")
+    @PostMapping("/update/{id}")
     public Task updateTask(@RequestBody Task newTask, @PathVariable(value = "id") Long id){
         return this.taskService.findById(id)
                 .map(task -> {

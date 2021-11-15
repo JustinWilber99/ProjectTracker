@@ -19,11 +19,11 @@ import java.util.List;
 public class ProjectController {
 	
     @Autowired
-    private  ProjectService projectService;
+    private ProjectService projectService;
     @Autowired
-    TaskService taskService;
+    private TaskService taskService;
     @Autowired
-    UserService userService;
+    private UserService userService;
 
 
     @PostMapping("/save")
@@ -31,7 +31,6 @@ public class ProjectController {
         System.out.println(project);
         return this.projectService.save(project);
     }
-    
 
     @PostMapping("/adduser/{projectid}/{userid}")
     public Project addUserToProject(@PathVariable(value = "projectid") Long projectid,@PathVariable(value = "userid") Long userid){
@@ -47,7 +46,6 @@ public class ProjectController {
         return this.projectService.save(project);
     }
 
-
     @PostMapping("/addtask/{projectid}/{taskid}")
     public Project addTaskToProject(@PathVariable(value = "projectid") Long projectid,@PathVariable(value = "taskid") Long taskid){
         Task task = this.taskService.findById(taskid).orElseThrow(
@@ -62,14 +60,12 @@ public class ProjectController {
         return this.projectService.save(project);
     }
 
-
     @GetMapping("/all")
     public ResponseEntity<List<Project>> getProjects(){
         return ResponseEntity.ok(
                 this.projectService.findAll()
         );
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<Project> getProject(@PathVariable(value = "id") Long id){
@@ -79,8 +75,7 @@ public class ProjectController {
         return ResponseEntity.ok().body(project);
     }
 
-
-    @PutMapping("/{id}")
+    @PostMapping("/update/{id}")
     public Project updateProject(@RequestBody Project newProject, @PathVariable(value = "id") Long id){
         return this.projectService.findById(id)
                 .map(project -> {
@@ -97,7 +92,6 @@ public class ProjectController {
                     return this.projectService.save(newProject);
                 });
     }
-    
 
     @PostMapping("/adduser/{id}")
     public Project addProject(@RequestBody User user, @PathVariable(value = "id") Long id){
@@ -107,7 +101,6 @@ public class ProjectController {
         project.addUserToProject(user);
         return this.projectService.save(project);
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removeProject(@PathVariable(value = "id") Long id){

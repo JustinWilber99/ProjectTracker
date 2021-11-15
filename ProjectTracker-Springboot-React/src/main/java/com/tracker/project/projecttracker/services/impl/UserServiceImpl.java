@@ -1,6 +1,5 @@
 package com.tracker.project.projecttracker.services.impl;
 
-
 import com.tracker.project.projecttracker.models.User;
 import com.tracker.project.projecttracker.repository.UserRepository;
 import com.tracker.project.projecttracker.services.UserService;
